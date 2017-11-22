@@ -12,6 +12,4 @@ public class DesktopRunner extends AbstractRunner {
         setSystemProperties();
         LOGGER.info("Browser: " + System.getProperty("browser.name"));
     }
-
-
 }
