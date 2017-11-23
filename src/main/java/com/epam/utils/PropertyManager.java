@@ -12,9 +12,9 @@ public class PropertyManager {
 
     static {
         properties = new Properties();
-        InputStream is = null;
+
         try {
-            is = new FileInputStream(PROPERTIES_FILE_PATH);
+            InputStream is = new FileInputStream(PROPERTIES_FILE_PATH);
             properties.load(is);
         } catch (IOException | NullPointerException e) {
             throw new RuntimeException("The app properties file cannot be read from '"
