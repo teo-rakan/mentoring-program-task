@@ -16,6 +16,7 @@ public abstract class HeaderLayout extends BasePage {
     private WebElement searchButton;
 
     public abstract List<MenuItem> getPrimaryMenuItems();
+
     public abstract List<MenuItem> getRightMenuItems();
 
     protected List<MenuItem> convertToMenuItemList(List<WebElement> headerMenuItems) {

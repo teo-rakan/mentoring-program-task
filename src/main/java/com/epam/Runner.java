@@ -39,7 +39,7 @@ public class Runner {
         listeners.add(AnnotationTransformer.class);
 
         testNG.setListenerClasses(listeners);
-        testNG.setTestClasses(new Class[] { HomePageHeaderVerificationTest.class });
+        testNG.setTestClasses(new Class[]{HomePageHeaderVerificationTest.class});
         testNG.run();
     }
 }

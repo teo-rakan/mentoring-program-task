@@ -13,8 +13,8 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class WaitUtil {
 
-    private final static  int TIMEOUT_SEC = 20;
-    private final static  int POLLING_DURATION_MILLISEC = 100;
+    private final static int TIMEOUT_SEC = 20;
+    private final static int POLLING_DURATION_MILLISEC = 100;
 
     public static void untilVisible(WebElement element, WebDriver driver) {
         new WebDriverWait(driver, TIMEOUT_SEC)

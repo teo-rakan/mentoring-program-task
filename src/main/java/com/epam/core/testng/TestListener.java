@@ -19,32 +19,32 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        LOGGER.debug( iTestResult.getName() + ": SUCCESS");
+        LOGGER.debug(iTestResult.getName() + ": SUCCESS");
     }
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        LOGGER.info( iTestResult.getName() + ": FAILED");
+        LOGGER.info(iTestResult.getName() + ": FAILED");
         LOGGER.error(ExceptionUtils.getStackTrace(iTestResult.getThrowable()));
     }
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
-        LOGGER.debug( iTestResult.getName() + ": SKIPPED");
+        LOGGER.debug(iTestResult.getName() + ": SKIPPED");
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
-        LOGGER.debug( iTestResult.getName() + ": FAILED with success percentage");
+        LOGGER.debug(iTestResult.getName() + ": FAILED with success percentage");
     }
 
     @Override
     public void onStart(ITestContext iTestContext) {
-        LOGGER.debug("===== " + iTestContext.getName() + " =====" );
+        LOGGER.debug("===== " + iTestContext.getName() + " =====");
     }
 
     @Override
     public void onFinish(ITestContext iTestContext) {
-        LOGGER.debug("======================================" );
+        LOGGER.debug("======================================");
     }
 }

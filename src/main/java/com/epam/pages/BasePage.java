@@ -19,7 +19,7 @@ public abstract class BasePage {
     @Inject
     private FieldDecorator fieldDecorator;
 
-    protected BasePage () {
+    protected BasePage() {
         GuiceInjector.getInjector().injectMembers(this);
 
         LOGGER.debug("Objects injected via Guice:");
