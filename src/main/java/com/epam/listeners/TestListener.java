@@ -1,5 +1,6 @@
 package com.epam.listeners;
 
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.ITestContext;
@@ -23,7 +24,8 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        LOGGER.debug( iTestResult.getName() + ": FAILED");
+        LOGGER.info( iTestResult.getName() + ": FAILED");
+        LOGGER.error(ExceptionUtils.getStackTrace(iTestResult.getThrowable()));
     }
 
     @Override
