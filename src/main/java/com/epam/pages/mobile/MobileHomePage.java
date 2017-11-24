@@ -12,7 +12,7 @@ public class MobileHomePage extends BasePage {
 
     private static final Logger LOGGER = LogManager.getLogger(MobileHomePage.class);
 
-    @FindBy(xpath = "//*[@data-label='menu close']")
+    @FindBy(xpath = "//div[@data-label='menu open']")
     private WebElement menuButton;
 
     public MobileHomePage() {

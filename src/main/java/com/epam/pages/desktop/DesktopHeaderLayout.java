@@ -22,6 +22,7 @@ public class DesktopHeaderLayout extends HeaderLayout {
 
     @Override
     public List<MenuItem> getPrimaryMenuItems() {
+        //todo check visibility
         return convertToMenuItemList(headerPrimaryMenuItems);
     }
 

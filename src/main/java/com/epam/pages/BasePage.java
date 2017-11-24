@@ -20,7 +20,7 @@ public abstract class BasePage {
     private FieldDecorator fieldDecorator;
 
     protected BasePage() {
-        GuiceInjector.getInjector().injectMembers(this);
+        GuiceInjector.get().injectMembers(this);
 
         LOGGER.debug("Objects injected via Guice:");
         LOGGER.debug("Driver manager: " + driverManager.getClass().getSimpleName());
