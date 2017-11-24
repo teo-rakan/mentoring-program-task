@@ -15,6 +15,6 @@ public class AnnotationTransformer implements IAnnotationTransformer {
     @Override
     public void transform(ITestAnnotation annotation, Class aClass, Constructor constructor, Method method) {
         annotation.setAlwaysRun(true);
-        LOGGER.debug("Set 'alwaysRun' = true for " + aClass.getSimpleName() + "." + method.getName());
+        LOGGER.debug("Set 'alwaysRun' = true for " + method.getName());
     }
 }
