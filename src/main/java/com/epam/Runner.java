@@ -1,7 +1,7 @@
 package com.epam;
 
-import com.epam.listeners.AnnotationTransformer;
-import com.epam.listeners.TestListener;
+import com.epam.core.testng.AnnotationTransformer;
+import com.epam.core.testng.TestListener;
 import com.epam.tests.desktop.HomePageHeaderVerificationTest;
 import com.epam.utils.PropertyManager;
 import org.apache.logging.log4j.LogManager;

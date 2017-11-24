@@ -1,7 +1,7 @@
 package com.epam;
 
-import com.epam.listeners.AnnotationTransformer;
-import com.epam.listeners.TestListener;
+import com.epam.core.testng.AnnotationTransformer;
+import com.epam.core.testng.TestListener;
 import com.epam.tests.mobile.HomePageGlobalVerificationTest;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;

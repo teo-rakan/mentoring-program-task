@@ -1,4 +1,4 @@
-package com.epam.listeners;
+package com.epam.core.testng;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
