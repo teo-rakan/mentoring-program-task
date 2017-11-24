@@ -11,7 +11,7 @@ public abstract class DriverManager {
 
     protected WebDriver driver;
 
-    WebDriver getDriver() {
+    public WebDriver getDriver() {
         if (null == driver) {
             createDriver();
         }
