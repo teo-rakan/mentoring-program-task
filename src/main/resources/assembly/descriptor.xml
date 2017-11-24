@@ -16,7 +16,9 @@
 
     <files>
         <file>
-            <source>target/${artifactId}-${project.version}.${project.packaging}</source>
+            <source>
+                target/${artifactId}-${project.version}.${project.packaging}
+            </source>
             <destName>${artifactId}.${project.packaging}</destName>
         </file>
     </files>
