@@ -17,9 +17,14 @@ public class BaseTest {
 
     @BeforeClass(description = "Inject members")
     public void inject() {
-        GuiceInjector.getInjector().injectMembers(this);
+        LOGGER.debug("Try to inject DriverManager to test class");
+        GuiceInjector.get().injectMembers(this);
 
         LOGGER.debug("Open home page");
-        driverManager.open("http://www.sho.com/");
+        try {
+            driverManager.open("http://www.sho.com/");
+        } catch (Exception ex) {
+            LOGGER.error(ex.getMessage());
+        }
     }
 }
