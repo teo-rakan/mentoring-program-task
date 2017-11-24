@@ -4,6 +4,7 @@ import com.epam.listeners.AnnotationTransformer;
 import com.epam.listeners.TestListener;
 import com.epam.tests.mobile.HomePageGlobalVerificationTest;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
+import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.ITestNGListener;
@@ -19,23 +20,28 @@ public class MobileRunner extends Runner {
         Runner runner = new MobileRunner();
         LOGGER.info("Mobile Runner");
         setSystemProperties();
-        //LOGGER.info("Browser: " + System.getProperty("browser.name"));
         runner.run();
     }
 
     void run() {
-        AppiumDriverLocalService appiumService = AppiumDriverLocalService.buildDefaultService();
+        AppiumDriverLocalService appiumService;
+
         List<Class<? extends ITestNGListener>> listeners = new ArrayList<>();
         listeners.add(TestListener.class);
         listeners.add(AnnotationTransformer.class);
 
         testNG.setListenerClasses(listeners);
-        testNG.setTestClasses(new Class[] { HomePageGlobalVerificationTest.class });
+        testNG.setTestClasses(new Class[]{HomePageGlobalVerificationTest.class});
 
+        appiumService = new AppiumServiceBuilder().withIPAddress("127.0.0.1").build();
         appiumService.start();
 
-        testNG.run();
-
-        appiumService.stop();
+        System.setProperty("appium.url", appiumService.getUrl().toString());
+        LOGGER.info("Appium URL: " + appiumService.getUrl());
+        try {
+            testNG.run();
+        } finally {
+            appiumService.stop();
+        }
     }
 }

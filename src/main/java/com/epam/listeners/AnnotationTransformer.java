@@ -13,8 +13,9 @@ public class AnnotationTransformer implements IAnnotationTransformer {
     private static final Logger LOGGER = LogManager.getLogger(TestListener.class);
 
     @Override
-    public void transform(ITestAnnotation annotation, Class aClass, Constructor constructor, Method method) {
+    public void transform(ITestAnnotation annotation, Class aClass,
+                          Constructor constructor, Method method) {
         annotation.setAlwaysRun(true);
-        LOGGER.debug("Set 'alwaysRun' = true for " + method.getName());
+        LOGGER.debug("Set 'alwaysRun'=true for " + method.getName());
     }
 }
