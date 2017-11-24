@@ -3,7 +3,6 @@ package com.epam.pages.desktop;
 import com.epam.pages.HeaderLayout;
 import com.epam.pages.bean.MenuItem;
 import com.epam.utils.WaitUtil;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -21,10 +20,6 @@ public class DesktopHeaderLayout extends HeaderLayout {
     @FindBy(className = "global-navigation__right-menu-item")
     private List<WebElement> headerRightMenuItems;
 
-    public DesktopHeaderLayout(WebDriver driver) {
-        super(driver);
-    }
-
     @Override
     public List<MenuItem> getPrimaryMenuItems() {
         return convertToMenuItemList(headerPrimaryMenuItems);
@@ -37,7 +32,7 @@ public class DesktopHeaderLayout extends HeaderLayout {
 
     public boolean isHeaderVisible() {
         try {
-            WaitUtil.untilVisible(header, driver);
+            WaitUtil.untilVisible(header, driverManager.getDriver());
         } catch (WebDriverException exception) {
             return false;
         }

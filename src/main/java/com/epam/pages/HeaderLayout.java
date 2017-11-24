@@ -1,7 +1,6 @@
 package com.epam.pages;
 
 import com.epam.pages.bean.MenuItem;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -15,10 +14,6 @@ public abstract class HeaderLayout extends BasePage {
 
     @FindBy(className = "global-navigation__search-icon")
     private WebElement searchButton;
-
-    protected HeaderLayout(WebDriver driver) {
-        super(driver);
-    }
 
     public abstract List<MenuItem> getPrimaryMenuItems();
     public abstract List<MenuItem> getRightMenuItems();
