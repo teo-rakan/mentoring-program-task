@@ -13,7 +13,7 @@ public class HomePageGlobalVerificationTest extends BaseTest {
 
     @Test
     public void homePageGlobalVerificationTest() {
-        HeaderLayout homePage = new MobileHomePage(driver).openMenu();
+        HeaderLayout homePage = new MobileHomePage().openMenu();
         List<MenuItem> menuItems = homePage.getPrimaryMenuItems();
 
         Assert.assertEquals(menuItems.size(), 6);

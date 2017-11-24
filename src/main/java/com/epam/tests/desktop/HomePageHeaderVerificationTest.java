@@ -13,7 +13,7 @@ public class HomePageHeaderVerificationTest extends BaseTest {
 
     @Test
     public void homePageHeaderVerificationTest() {
-        HeaderLayout homePage = new DesktopHeaderLayout(driver);
+        HeaderLayout homePage = new DesktopHeaderLayout();
         List<MenuItem> primaryMenuItems = homePage.getPrimaryMenuItems();
 
         Assert.assertEquals(primaryMenuItems.size(), 5);
