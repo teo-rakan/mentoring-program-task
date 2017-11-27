@@ -26,7 +26,6 @@ public class DesktopHeaderLayout extends HeaderLayout {
         return convertToMenuItemList(headerPrimaryMenuItems);
     }
 
-    @Override
     public List<MenuItem> getRightMenuItems() {
         return convertToMenuItemList(headerRightMenuItems);
     }

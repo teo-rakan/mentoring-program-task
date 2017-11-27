@@ -21,8 +21,6 @@ public abstract class HeaderLayout extends BasePage {
 
     public abstract List<MenuItem> getPrimaryMenuItems();
 
-    public abstract List<MenuItem> getRightMenuItems();
-
     protected List<MenuItem> convertToMenuItemList(List<WebElement> headerMenuItems) {
         List<MenuItem> menuItems = new ArrayList<>();
 
