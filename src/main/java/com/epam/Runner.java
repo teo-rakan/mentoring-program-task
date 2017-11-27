@@ -15,17 +15,15 @@ import java.util.List;
 public class Runner {
 
     private static final Logger LOGGER = LogManager.getLogger(Runner.class);
-    protected TestNG testNG = new TestNG();
+    TestNG testNG = new TestNG();
 
     Runner() {
-
     }
 
     public static void main(String[] args) {
         Runner runner = new Runner();
         LOGGER.info("Desktop Runner");
         setSystemProperties();
-        //LOGGER.info("Browser: " + System.getProperty("browser.name"));
         runner.run();
     }
 
@@ -33,12 +31,15 @@ public class Runner {
         System.setProperty("browser.name", PropertyManager.get("browser.name"));
     }
 
-    void run() {
+    List<Class<? extends ITestNGListener>> getListeners() {
         List<Class<? extends ITestNGListener>> listeners = new ArrayList<>();
         listeners.add(TestListener.class);
         listeners.add(AnnotationTransformer.class);
+        return listeners;
+    }
 
-        testNG.setListenerClasses(listeners);
+    void run() {
+        testNG.setListenerClasses(getListeners());
         testNG.setTestClasses(new Class[]{HomePageHeaderVerificationTest.class});
         testNG.run();
     }

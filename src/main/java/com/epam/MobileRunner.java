@@ -1,16 +1,11 @@
 package com.epam;
 
-import com.epam.core.testng.AnnotationTransformer;
-import com.epam.core.testng.TestListener;
 import com.epam.tests.mobile.HomePageGlobalVerificationTest;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.testng.ITestNGListener;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.io.File;
 
 public class MobileRunner extends Runner {
 
@@ -23,21 +18,26 @@ public class MobileRunner extends Runner {
         runner.run();
     }
 
+    AppiumDriverLocalService buildAppiumService() {
+        return new AppiumServiceBuilder()
+                .withLogFile(new File("./logs/appium.log"))
+                .withIPAddress("127.0.0.1")
+                .build();
+    }
+
     void run() {
-        AppiumDriverLocalService appiumService;
+        AppiumDriverLocalService appiumService = buildAppiumService();
+        String appiumUrl;
 
-        List<Class<? extends ITestNGListener>> listeners = new ArrayList<>();
-        listeners.add(TestListener.class);
-        listeners.add(AnnotationTransformer.class);
-
-        testNG.setListenerClasses(listeners);
+        testNG.setListenerClasses(getListeners());
         testNG.setTestClasses(new Class[]{HomePageGlobalVerificationTest.class});
 
-        appiumService = new AppiumServiceBuilder().withIPAddress("127.0.0.1").build();
         appiumService.start();
 
-        System.setProperty("appium.url", appiumService.getUrl().toString());
-        LOGGER.info("Appium URL: " + appiumService.getUrl());
+        appiumUrl = appiumService.getUrl().toString();
+        System.setProperty("appium.url", appiumUrl);
+        LOGGER.info("Appium URL: " + appiumUrl);
+
         try {
             testNG.run();
         } finally {
