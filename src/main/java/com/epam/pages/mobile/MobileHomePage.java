@@ -19,7 +19,7 @@ public class MobileHomePage extends BasePage {
         LOGGER.debug("Create home page object");
     }
 
-    public HeaderLayout openMenu() {
+    public MobileHeaderLayout openMenu() {
         LOGGER.debug("Open header menu");
         WaitUtil.untilVisible(menuButton, driverManager.getDriver());
         menuButton.click();
