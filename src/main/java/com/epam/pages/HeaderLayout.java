@@ -21,13 +21,20 @@ public abstract class HeaderLayout extends BasePage {
 
     public abstract List<MenuItem> getPrimaryMenuItems();
 
-    protected List<MenuItem> convertToMenuItemList(List<WebElement> headerMenuItems) {
-        List<MenuItem> menuItems = new ArrayList<>();
+    protected List<MenuItem> convertToMenuItemList(List<WebElement> menuItems) {
+        List<MenuItem> entityList = new ArrayList<>();
 
-        for (WebElement headerMenuItem : headerMenuItems) {
-            LOGGER.debug(headerMenuItem);
-            menuItems.add(new MenuItem(headerMenuItem.getText(), headerMenuItem.getAttribute("href")));
+        for (WebElement menuItem : menuItems) {
+            LOGGER.debug(menuItem);
+            entityList.add(convertToMenuItem(menuItem));
         }
-        return menuItems;
+        return entityList;
+    }
+
+    protected MenuItem convertToMenuItem(WebElement menuItem) {
+        return new MenuItem(menuItem.getText(),
+                menuItem.getAttribute("href"),
+                menuItem.getCssValue("background-color"),
+                menuItem.getCssValue("color"));
     }
 }
