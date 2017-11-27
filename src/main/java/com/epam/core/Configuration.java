@@ -4,6 +4,7 @@ public class Configuration {
     private static String appiumURL;
     private static String browserName;
     private static String baseUrl;
+    private static String[] suites;
 
     public static String getAppiumURL() {
         return appiumURL;
@@ -27,5 +28,13 @@ public class Configuration {
 
     public static void setBaseUrl(String baseUrl) {
         Configuration.baseUrl = baseUrl;
+    }
+
+    public String[] getSuites() {
+        return suites;
+    }
+
+    public static void setSuites(String[] suites) {
+        Configuration.suites = suites;
     }
 }

@@ -13,6 +13,8 @@ public class CliOptions {
     private static final String BASE_URL_DEFAULT = "http://www.sho.com";
     private static final String BROWSER_NAME_OPTION = "browser_name";
     private static final String BROWSER_NAME_DEFAULT = "Chrome";
+    private static final String SUITE_OPTION = "suite";
+    private static final String[] SUITE_DEFAULT = {"testng.xml"};
 
     private static Option getBaseUrlOption() {
         return new Option("bu", BASE_URL_OPTION, true,
@@ -24,18 +26,26 @@ public class CliOptions {
                 "Set browser name for Mobile: iOS, Android. For Web: Safari, IE, Chrome.");
     }
 
+    private static Option getSuiteOption() {
+        return new Option("s", SUITE_OPTION, true,
+                "Set testNG suite file(-es) path");
+    }
+
     public static void parseCmdLineArgs(String[] args) {
         Options options = new Options();
         options.addOption(getBaseUrlOption());
         options.addOption(getBrowserOption());
+        options.addOption(getSuiteOption());
 
         try {
             CommandLine cl = new GnuParser().parse(options, args);
             String baseUrl = cl.getOptionValue(BASE_URL_OPTION, BASE_URL_DEFAULT);
             String browser = cl.getOptionValue(BROWSER_NAME_OPTION, BROWSER_NAME_DEFAULT);
+            String[] suites = cl.getOptionValues(SUITE_OPTION);
 
             Configuration.setBaseUrl(baseUrl);
             Configuration.setBrowserName(browser);
+            Configuration.setSuites(suites.length == 0 ? SUITE_DEFAULT : suites);
         } catch (ParseException var4) {
             LOGGER.error(var4.getMessage());
             HelpFormatter formatter = new HelpFormatter();

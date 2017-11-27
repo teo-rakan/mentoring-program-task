@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.ITestNGListener;
 import org.testng.TestNG;
+import org.testng.xml.XmlSuite;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,9 @@ public class Runner {
 
     void run() {
         testNG.setListenerClasses(getListeners());
+
+        //testNG.setXmlSuites();
+
         testNG.setTestClasses(new Class[]{HomePageHeaderVerificationTest.class});
         testNG.run();
     }
