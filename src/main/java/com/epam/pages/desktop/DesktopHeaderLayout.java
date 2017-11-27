@@ -14,10 +14,10 @@ public class DesktopHeaderLayout extends HeaderLayout {
     @FindBy(xpath = "//nav[@data-context='global navigation']")
     private WebElement header;
 
-    @FindBy(className = "global-navigation__primary-menu-item")
+    @FindBy(xpath = "//*[@class='global-navigation__primary-menu-item']//a")
     private List<WebElement> headerPrimaryMenuItems;
 
-    @FindBy(className = "global-navigation__right-menu-item")
+    @FindBy(xpath = "//*[@class='global-navigation__right-menu-item']//a")
     private List<WebElement> headerRightMenuItems;
 
     @Override

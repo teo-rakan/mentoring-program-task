@@ -14,7 +14,7 @@ public class MobileHeaderLayout extends HeaderLayout {
 
     private static final Logger LOGGER = LogManager.getLogger(MobileHeaderLayout.class);
 
-    @FindBy(xpath = "//*[@class='global-navigation__primary-mobile-menu-item']")
+    @FindBy(xpath = "//*[@class='global-navigation__primary-mobile-menu-item']//a")
     private List<WebElement> headerPrimaryMenuItems;
 
     @FindBy(xpath = "//*[@data-label='menu open']")
