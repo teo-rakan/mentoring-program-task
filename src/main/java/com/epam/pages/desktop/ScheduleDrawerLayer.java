@@ -1,4 +1,4 @@
-package com.epam.tests.desktop;
+package com.epam.pages.desktop;
 
 import com.epam.pages.BasePage;
 import org.openqa.selenium.WebElement;
