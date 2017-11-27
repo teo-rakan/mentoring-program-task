@@ -1,9 +1,9 @@
 package com.epam;
 
+import com.epam.core.cli.CliOptions;
 import com.epam.core.testng.AnnotationTransformer;
 import com.epam.core.testng.TestListener;
 import com.epam.tests.desktop.HomePageHeaderVerificationTest;
-import com.epam.utils.PropertyManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.ITestNGListener;
@@ -21,14 +21,10 @@ public class Runner {
     }
 
     public static void main(String[] args) {
+        CliOptions.parseCmdLineArgs(args);
         Runner runner = new Runner();
         LOGGER.info("Desktop Runner");
-        setSystemProperties();
         runner.run();
-    }
-
-    static void setSystemProperties() {
-        System.setProperty("browser.name", PropertyManager.get("browser.name"));
     }
 
     List<Class<? extends ITestNGListener>> getListeners() {

@@ -1,10 +1,13 @@
 package com.epam;
 
+import com.epam.core.Configuration;
+import com.epam.core.cli.CliOptions;
 import com.epam.tests.mobile.HomePageGlobalVerificationTest;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import java.io.File;
 
 public class MobileRunner extends Runner {
@@ -12,9 +15,9 @@ public class MobileRunner extends Runner {
     private static final Logger LOGGER = LogManager.getLogger(MobileRunner.class);
 
     public static void main(String[] args) {
+        CliOptions.parseCmdLineArgs(args);
         Runner runner = new MobileRunner();
         LOGGER.info("Mobile Runner");
-        setSystemProperties();
         runner.run();
     }
 
@@ -35,9 +38,8 @@ public class MobileRunner extends Runner {
         appiumService.start();
 
         appiumUrl = appiumService.getUrl().toString();
-        System.setProperty("appium.url", appiumUrl);
+        Configuration.setAppiumURL(appiumUrl);
         LOGGER.info("Appium URL: " + appiumUrl);
-
         try {
             testNG.run();
         } finally {
