@@ -15,24 +15,41 @@ public class MobileHeaderLayout extends HeaderLayout {
     private static final Logger LOGGER = LogManager.getLogger(MobileHeaderLayout.class);
 
     @FindBy(xpath = "//*[@class='global-navigation__primary-mobile-menu-item']//a")
-    private List<WebElement> headerPrimaryMenuItems;
+    private List<WebElement> primaryMenuItems;
+
+    @FindBy(xpath = "//*[contains(@class,'global-navigation--red')]//a")
+    private List<WebElement> redMenuItems;
+
+    @FindBy(xpath = "//*[@class='global-navigation__get-showtime-mobile-menu-item']//a")
+    private WebElement showTimeMenuItem;
 
     @FindBy(xpath = "//*[@data-label='menu open']")
     private WebElement closeButton;
-
-    public void close() {
-        closeButton.click();
-    }
 
     @Override
     public List<MenuItem> getPrimaryMenuItems() {
         LOGGER.debug("Get primary menu items as list [title, link]");
         WaitUtil.untilVisible(closeButton, driverManager.getDriver());
-        return convertToMenuItemList(headerPrimaryMenuItems);
+        return convertToMenuItemList(primaryMenuItems);
     }
 
-    @Override
-    public List<MenuItem> getRightMenuItems() {
-        return null;
+    public List<MenuItem> getRedMenuItems() {
+        LOGGER.debug("Get red menu items as list [title, link]");
+        WaitUtil.untilVisible(closeButton, driverManager.getDriver());
+        return convertToMenuItemList(redMenuItems);
+    }
+
+    public MenuItem getGetShowtime() {
+        LOGGER.debug("Get 'Get showtime' menu item");
+        WaitUtil.untilVisible(closeButton, driverManager.getDriver());
+        return new MenuItem(showTimeMenuItem.getText(),
+                showTimeMenuItem.getAttribute("href"));
+    }
+
+    public MobileHomePage closeMenu() {
+        LOGGER.debug("Close menu layout");
+        WaitUtil.untilVisible(closeButton, driverManager.getDriver());
+        closeButton.click();
+        return new MobileHomePage();
     }
 }
