@@ -11,8 +11,11 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import static com.epam.pages.bean.RGBAColor.BLACK;
+import static com.epam.pages.bean.RGBAColor.WHITE;
 
 public class HomePageHeaderVerificationTest extends BaseTest {
 
@@ -21,12 +24,12 @@ public class HomePageHeaderVerificationTest extends BaseTest {
     @DataProvider(name = "desktop headers")
     public static Object[][] headers() {
         String baseURL = Configuration.getBaseUrl();
-        List<MenuItem> headers = new ArrayList<>();
-        headers.add(new MenuItem("SERIES", baseURL + "/series"));
-        headers.add(new MenuItem("MOVIES", baseURL + "/movies"));
-        headers.add(new MenuItem("SPORTS", baseURL + "/sports"));
-        headers.add(new MenuItem("DOCUMENTARIES", baseURL + "/documentaries"));
-        headers.add(new MenuItem("COMEDY", baseURL + "/comedy"));
+        List<MenuItem> headers = Arrays.asList(
+                new MenuItem("SERIES", baseURL + "/series", BLACK, WHITE),
+                new MenuItem("MOVIES", baseURL + "/movies", BLACK, WHITE),
+                new MenuItem("SPORTS", baseURL + "/sports", BLACK, WHITE),
+                new MenuItem("DOCUMENTARIES", baseURL + "/documentaries", BLACK, WHITE),
+                new MenuItem("COMEDY", baseURL + "/comedy", BLACK, WHITE));
         return new Object[][]{{headers}};
     }
 

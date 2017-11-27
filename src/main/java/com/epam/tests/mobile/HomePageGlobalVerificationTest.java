@@ -10,8 +10,10 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import static com.epam.pages.bean.RGBAColor.*;
 
 public class HomePageGlobalVerificationTest extends BaseTest {
 
@@ -19,19 +21,19 @@ public class HomePageGlobalVerificationTest extends BaseTest {
     public static Object[][] headers() {
         String baseURL = Configuration.getBaseUrl();
 
-        List<MenuItem> primary = new ArrayList<>();
-        primary.add(new MenuItem("HOME", baseURL + "/"));
-        primary.add(new MenuItem("SERIES", baseURL + "/series"));
-        primary.add(new MenuItem("MOVIES", baseURL + "/movies"));
-        primary.add(new MenuItem("SPORTS", baseURL + "/sports"));
-        primary.add(new MenuItem("DOCUMENTARIES", baseURL + "/documentaries"));
-        primary.add(new MenuItem("COMEDY", baseURL + "/comedy"));
+        List<MenuItem> primary = Arrays.asList(
+                new MenuItem("HOME", baseURL + "/", BLACK, WHITE),
+                new MenuItem("SERIES", baseURL + "/series", BLACK, WHITE),
+                new MenuItem("MOVIES", baseURL + "/movies", BLACK, WHITE),
+                new MenuItem("SPORTS", baseURL + "/sports", BLACK, WHITE),
+                new MenuItem("DOCUMENTARIES", baseURL + "/documentaries", BLACK, WHITE),
+                new MenuItem("COMEDY", baseURL + "/comedy", BLACK, WHITE));
 
-        List<MenuItem> red = new ArrayList<>();
-        red.add(new MenuItem("TV SCHEDULE", baseURL + "/schedule"));
-        red.add(new MenuItem("ON DEMAND AND STREAMING SCHEDULE", baseURL + "/on-demand/series"));
+        List<MenuItem> red = Arrays.asList(
+                new MenuItem("TV SCHEDULE", baseURL + "/schedule", BLACK, RED),
+                new MenuItem("ON DEMAND AND STREAMING SCHEDULE", baseURL + "/on-demand/series", BLACK, RED));
 
-        MenuItem getShowtime = new MenuItem("GET SHOWTIME", baseURL + "/order");
+        MenuItem getShowtime = new MenuItem("GET SHOWTIME", baseURL + "/order", BLACK, WHITE);
 
         return new Object[][]{{primary, red, getShowtime}};
     }

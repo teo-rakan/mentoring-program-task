@@ -42,8 +42,7 @@ public class MobileHeaderLayout extends HeaderLayout {
     public MenuItem getGetShowtime() {
         LOGGER.debug("Get 'Get showtime' menu item");
         WaitUtil.untilVisible(closeButton, driverManager.getDriver());
-        return new MenuItem(showTimeMenuItem.getText(),
-                showTimeMenuItem.getAttribute("href"));
+        return convertToMenuItem(showTimeMenuItem);
     }
 
     public MobileHomePage closeMenu() {
