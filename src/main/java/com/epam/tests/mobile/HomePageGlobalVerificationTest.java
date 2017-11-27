@@ -3,7 +3,6 @@ package com.epam.tests.mobile;
 import com.epam.core.Configuration;
 import com.epam.pages.bean.MenuItem;
 import com.epam.pages.mobile.MobileHeaderLayout;
-import com.epam.pages.mobile.MobileHomePage;
 import com.epam.tests.BaseTest;
 import com.epam.utils.HttpUtil;
 import org.testng.Assert;
@@ -43,15 +42,30 @@ public class HomePageGlobalVerificationTest extends BaseTest {
     public void homePageGlobalVerificationTest(List<MenuItem> primary,
                                                List<MenuItem> red,
                                                MenuItem getShowtime) {
-        MobileHeaderLayout headerLayout = new MobileHomePage().openMenu();
+        MobileHeaderLayout headerLayout = new MobileHeaderLayout();
+        verifyExpandedMenu(headerLayout, primary, red, getShowtime);
+
+        headerLayout.openSearchField();
+        String bgColor = headerLayout.getSearchBackgroundColor();
+        String placeholder = headerLayout.getSearchPlaceholder();
+
+        Assert.assertEquals(placeholder, "SEARCH");
+        Assert.assertEquals(bgColor, WHITE.toString());
+    }
+
+    private void verifyExpandedMenu(MobileHeaderLayout headerLayout,
+                                    List<MenuItem> primary,
+                                    List<MenuItem> red,
+                                    MenuItem getShowtime) {
+        headerLayout.openMenu();
         verifyMenuItems(headerLayout.getPrimaryMenuItems(), primary);
         verifyMenuItems(headerLayout.getRedMenuItems(), red);
         verifyMenuItem(headerLayout.getGetShowtime(), getShowtime);
         headerLayout.closeMenu();
-
     }
 
-    private void verifyMenuItems(List<MenuItem> actualHeaders, List<MenuItem> expectedHeaders) {
+    private void verifyMenuItems(List<MenuItem> actualHeaders,
+                                 List<MenuItem> expectedHeaders) {
         Assert.assertEquals(actualHeaders.size(), expectedHeaders.size(),
                 "Expected header count: " + expectedHeaders.size()
                         + " Found: " + actualHeaders.size());
