@@ -24,7 +24,7 @@ public abstract class HeaderLayout extends BasePage {
 
     public abstract List<MenuItem> getPrimaryMenuItems();
 
-    boolean isSearchIconDisplayed() {
+    public boolean isSearchIconDisplayed() {
         driverManager.waitUntilVisible(searchIcon);
         return searchIcon.isDisplayed();
     }

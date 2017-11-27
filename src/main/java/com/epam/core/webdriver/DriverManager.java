@@ -1,8 +1,10 @@
 package com.epam.core.webdriver;
 
+import com.epam.utils.WaitUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 
 public abstract class DriverManager {
@@ -33,5 +35,8 @@ public abstract class DriverManager {
         }
     }
 
+    public void waitUntilVisible(WebElement element) {
+        WaitUtil.untilVisible(element, driver);
+    }
 }
 
