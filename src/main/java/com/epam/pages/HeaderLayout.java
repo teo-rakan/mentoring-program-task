@@ -17,9 +17,33 @@ public abstract class HeaderLayout extends BasePage {
     private WebElement showtimeLogo;
 
     @FindBy(className = "global-navigation__search-icon")
-    private WebElement searchButton;
+    private WebElement searchIcon;
+
+    @FindBy(id = "searchField")
+    private WebElement searchInput;
 
     public abstract List<MenuItem> getPrimaryMenuItems();
+
+    boolean isSearchIconDisplayed() {
+        driverManager.waitUntilVisible(searchIcon);
+        return searchIcon.isDisplayed();
+    }
+
+    public HeaderLayout openSearchField() {
+        if (isSearchIconDisplayed()) searchIcon.click();
+        driverManager.waitUntilVisible(searchInput);
+        return this;
+    }
+
+    public String getSearchPlaceholder() {
+        driverManager.waitUntilVisible(searchInput);
+        return searchInput.getAttribute("placeholder");
+    }
+
+    public String getSearchBackgroundColor() {
+        driverManager.waitUntilVisible(searchInput);
+        return searchInput.getCssValue("background-color");
+    }
 
     protected List<MenuItem> convertToMenuItemList(List<WebElement> menuItems) {
         List<MenuItem> entityList = new ArrayList<>();

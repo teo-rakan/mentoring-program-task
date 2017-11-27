@@ -2,7 +2,6 @@ package com.epam.pages.desktop;
 
 import com.epam.pages.HeaderLayout;
 import com.epam.pages.bean.MenuItem;
-import com.epam.utils.WaitUtil;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -32,7 +31,7 @@ public class DesktopHeaderLayout extends HeaderLayout {
 
     public boolean isHeaderVisible() {
         try {
-            WaitUtil.untilVisible(header, driverManager.getDriver());
+            driverManager.waitUntilVisible(header);
         } catch (WebDriverException exception) {
             return false;
         }
