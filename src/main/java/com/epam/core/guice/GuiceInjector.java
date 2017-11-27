@@ -1,5 +1,6 @@
 package com.epam.core.guice;
 
+import com.epam.core.Configuration;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
@@ -47,7 +48,7 @@ public class GuiceInjector {
 
     public static Injector get() {
         if (injector == null) {
-            String targetTestEnvironment = System.getProperty("browser.name");
+            String targetTestEnvironment = Configuration.getBrowserName();
             Class<? extends Module> moduleClass = findModule(targetTestEnvironment);
             Module module = createInstance(moduleClass);
 
