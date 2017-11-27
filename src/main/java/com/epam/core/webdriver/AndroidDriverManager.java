@@ -7,6 +7,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 public class AndroidDriverManager extends MobileDriverManager {
 
@@ -19,6 +20,7 @@ public class AndroidDriverManager extends MobileDriverManager {
 
         try {
             driver = new AndroidDriver<>(new URL(url), capabilities);
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         } catch (MalformedURLException e) {
             LOGGER.error("Malformed URL: " + url);
         }

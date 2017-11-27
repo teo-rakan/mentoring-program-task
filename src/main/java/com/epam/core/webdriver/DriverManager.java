@@ -9,7 +9,7 @@ public abstract class DriverManager {
 
     private static final Logger LOGGER = LogManager.getLogger(DriverManager.class);
 
-    protected WebDriver driver;
+    WebDriver driver;
 
     public WebDriver getDriver() {
         if (null == driver) {
@@ -29,6 +29,7 @@ public abstract class DriverManager {
         if (null != driver) {
             driver.quit();
             driver = null;
+            LOGGER.debug("Driver quited");
         }
     }
 
