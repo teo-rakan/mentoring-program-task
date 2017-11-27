@@ -1,5 +1,6 @@
 package com.epam.core.webdriver;
 
+import com.epam.core.Configuration;
 import io.appium.java_client.android.AndroidDriver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,7 +17,7 @@ public class AndroidDriverManager extends MobileDriverManager {
     @Override
     void createDriver() {
         DesiredCapabilities capabilities = loadCapabilitiesFromProperties("android");
-        String url = System.getProperty("appium.url");
+        String url = Configuration.getAppiumURL();
 
         try {
             driver = new AndroidDriver<>(new URL(url), capabilities);
