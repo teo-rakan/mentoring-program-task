@@ -14,6 +14,9 @@ public class MobileHeaderLayout extends HeaderLayout {
 
     private static final Logger LOGGER = LogManager.getLogger(MobileHeaderLayout.class);
 
+    @FindBy(xpath = "//div[@data-label='menu open']")
+    private WebElement hamburgerIcon;
+
     @FindBy(xpath = "//*[@class='global-navigation__primary-mobile-menu-item']//a")
     private List<WebElement> primaryMenuItems;
 
@@ -23,32 +26,36 @@ public class MobileHeaderLayout extends HeaderLayout {
     @FindBy(xpath = "//*[@class='global-navigation__get-showtime-mobile-menu-item']//a")
     private WebElement showTimeMenuItem;
 
-    @FindBy(xpath = "//*[@data-label='menu open']")
-    private WebElement closeButton;
-
     @Override
     public List<MenuItem> getPrimaryMenuItems() {
         LOGGER.debug("Get primary menu items as list [title, link]");
-        WaitUtil.untilVisible(closeButton, driverManager.getDriver());
+        driverManager.waitUntilVisible(hamburgerIcon);
         return convertToMenuItemList(primaryMenuItems);
     }
 
     public List<MenuItem> getRedMenuItems() {
         LOGGER.debug("Get red menu items as list [title, link]");
-        WaitUtil.untilVisible(closeButton, driverManager.getDriver());
+        driverManager.waitUntilVisible(hamburgerIcon);
         return convertToMenuItemList(redMenuItems);
     }
 
     public MenuItem getGetShowtime() {
         LOGGER.debug("Get 'Get showtime' menu item");
-        WaitUtil.untilVisible(closeButton, driverManager.getDriver());
+        driverManager.waitUntilVisible(hamburgerIcon);
         return convertToMenuItem(showTimeMenuItem);
     }
 
-    public MobileHomePage closeMenu() {
+    public MobileHeaderLayout openMenu() {
+        LOGGER.debug("Open header menu");
+        driverManager.waitUntilVisible(hamburgerIcon);
+        hamburgerIcon.click();
+        return new MobileHeaderLayout();
+    }
+
+    public MobileHeaderLayout closeMenu() {
         LOGGER.debug("Close menu layout");
-        WaitUtil.untilVisible(closeButton, driverManager.getDriver());
-        closeButton.click();
-        return new MobileHomePage();
+        driverManager.waitUntilVisible(hamburgerIcon);
+        hamburgerIcon.click();
+        return this;
     }
 }
