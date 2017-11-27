@@ -24,4 +24,19 @@ public class MenuItem {
     public void setLink(String link) {
         this.link = link;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) return false;
+        if (other == this) return true;
+        if (!(other instanceof MenuItem)) return false;
+        MenuItem otherMenuItem = (MenuItem) other;
+        return title.equalsIgnoreCase(otherMenuItem.getTitle())
+                && link.equalsIgnoreCase(otherMenuItem.getLink());
+    }
+
+    @Override
+    public String toString() {
+        return title + " " + link;
+    }
 }
