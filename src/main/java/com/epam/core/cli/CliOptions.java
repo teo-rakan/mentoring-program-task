@@ -64,17 +64,7 @@ public class CliOptions {
 
     private static void setSuites(String[] xmlSuites) {
         if (xmlSuites != null && xmlSuites.length > 0) {
-            List<String> validSuites = new ArrayList<>();
-            for (String xmlSuite : xmlSuites) {
-                if (isFileExists(xmlSuite))
-                    validSuites.add(xmlSuite);
-                else if (isFileExists("." + xmlSuite))
-                    validSuites.add("." + xmlSuite);
-                else if (isFileExists(SUITE_DIR_DEFAULT + xmlSuite))
-                    validSuites.add(SUITE_DIR_DEFAULT + xmlSuite);
-                else
-                    LOGGER.error("Cannot find suite file: " + xmlSuite);
-            }
+            List<String> validSuites = validateSuitePaths(xmlSuites);
             if (validSuites.isEmpty()) {
                 LOGGER.warn("Default suite(-es) will be used: "
                         + Arrays.toString(SUITE_DEFAULT));
@@ -85,6 +75,21 @@ public class CliOptions {
         } else {
             Configuration.setSuites(SUITE_DEFAULT);
         }
+    }
+
+    private static List<String> validateSuitePaths(String[] xmlSuites) {
+        List<String> validSuites = new ArrayList<>();
+        for (String xmlSuite : xmlSuites) {
+            if (isFileExists(xmlSuite))
+                validSuites.add(xmlSuite);
+            else if (isFileExists("." + xmlSuite))
+                validSuites.add("." + xmlSuite);
+            else if (isFileExists(SUITE_DIR_DEFAULT + xmlSuite))
+                validSuites.add(SUITE_DIR_DEFAULT + xmlSuite);
+            else
+                LOGGER.error("Cannot find suite file: " + xmlSuite);
+        }
+        return validSuites;
     }
 
     private static boolean isFileExists(String relativeOrFullPath) {
