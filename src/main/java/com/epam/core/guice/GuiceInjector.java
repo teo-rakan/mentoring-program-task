@@ -48,7 +48,9 @@ public class GuiceInjector {
 
     public static Injector get() {
         if (injector == null) {
-            String targetTestEnvironment = Configuration.getBrowserName();
+            String targetTestEnvironment = Configuration.isMobile()
+                    ? Configuration.getTargetPlatform()
+                    : Configuration.getBrowserName();
             Class<? extends Module> moduleClass = findModule(targetTestEnvironment);
             Module module = createInstance(moduleClass);
 

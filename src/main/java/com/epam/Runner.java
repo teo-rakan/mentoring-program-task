@@ -13,18 +13,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.epam.core.Configuration.isMobile;
+
 public class Runner {
 
     private static final Logger LOGGER = LogManager.getLogger(Runner.class);
     TestNG testNG = new TestNG();
 
-    Runner() {
-    }
-
     public static void main(String[] args) {
         CliOptions.parseCmdLineArgs(args);
-        Runner runner = new Runner();
-        LOGGER.info("Desktop Runner");
+        Runner runner = isMobile() ? new MobileRunner() : new Runner();
         runner.run();
     }
 
@@ -36,6 +34,7 @@ public class Runner {
     }
 
     void run() {
+        LOGGER.info("Desktop Runner");
         testNG.setListenerClasses(getListeners());
         testNG.setTestSuites(Arrays.asList(Configuration.getSuites()));
         testNG.run();

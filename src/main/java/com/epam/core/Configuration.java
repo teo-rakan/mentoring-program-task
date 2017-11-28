@@ -3,6 +3,7 @@ package com.epam.core;
 public class Configuration {
     private static String appiumURL;
     private static String browserName;
+    private static String targetPlatform;
     private static String baseUrl;
     private static String[] suites;
 
@@ -36,5 +37,17 @@ public class Configuration {
 
     public static void setSuites(String[] suites) {
         Configuration.suites = suites;
+    }
+
+    public static String getTargetPlatform() {
+        return targetPlatform;
+    }
+
+    public static void setTargetPlatform(String targetPlatform) {
+        Configuration.targetPlatform = targetPlatform;
+    }
+
+    public static boolean isMobile() {
+        return targetPlatform.matches("(ios|android)");
     }
 }

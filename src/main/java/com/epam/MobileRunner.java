@@ -17,7 +17,6 @@ public class MobileRunner extends Runner {
     public static void main(String[] args) {
         CliOptions.parseCmdLineArgs(args);
         Runner runner = new MobileRunner();
-        LOGGER.info("Mobile Runner");
         runner.run();
     }
 
@@ -28,7 +27,9 @@ public class MobileRunner extends Runner {
                 .build();
     }
 
+    @Override
     void run() {
+        LOGGER.info("Mobile Runner");
         AppiumDriverLocalService appiumService = buildAppiumService();
 
         testNG.setListenerClasses(getListeners());
