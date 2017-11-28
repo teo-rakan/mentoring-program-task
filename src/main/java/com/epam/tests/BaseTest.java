@@ -6,8 +6,8 @@ import com.epam.core.webdriver.DriverManager;
 import com.epam.utils.HttpUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 
 import javax.inject.Inject;
 
@@ -21,12 +21,11 @@ public class BaseTest {
     @Inject
     protected DriverManager driverManager;
 
-    @BeforeClass
-    public void injectMembers() {
+    public BaseTest() {
         GuiceInjector.get().injectMembers(this);
     }
 
-    @BeforeClass(dependsOnMethods = "injectMembers")
+    @BeforeSuite
     public void openBrowser() {
         LOGGER.debug("Open home page");
         try {
@@ -36,7 +35,7 @@ public class BaseTest {
         }
     }
 
-    @AfterClass
+    @AfterSuite
     public void closeBrowser() {
         driverManager.quit();
     }
