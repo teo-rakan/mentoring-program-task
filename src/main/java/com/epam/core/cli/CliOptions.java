@@ -31,29 +31,27 @@ public class CliOptions {
                 "Set testNG suite file(-es) path");
     }
 
-    public static void parseCmdLineArgs(String[] args) {
+    private static Options getAllOptions() {
         Options options = new Options();
         options.addOption(getBaseUrlOption());
         options.addOption(getBrowserOption());
         options.addOption(getSuiteOption());
+        return options;
+    }
 
+    public static void parseCmdLineArgs(String[] args) {
         try {
-            CommandLine cl = new GnuParser().parse(options, args);
+            CommandLine cl = new GnuParser().parse(getAllOptions(), args);
             String baseUrl = cl.getOptionValue(BASE_URL_OPTION, BASE_URL_DEFAULT);
             String browser = cl.getOptionValue(BROWSER_NAME_OPTION, BROWSER_NAME_DEFAULT);
             String[] suites = cl.getOptionValues(SUITE_OPTION);
 
             Configuration.setBaseUrl(baseUrl);
             Configuration.setBrowserName(browser);
-            Configuration.setSuites(suites.length == 0 ? SUITE_DEFAULT : suites);
-        } catch (ParseException var4) {
-            LOGGER.error(var4.getMessage());
-            HelpFormatter formatter = new HelpFormatter();
-            formatter.setWidth(128);
-            formatter.printHelp(" ", options);
+            Configuration.setSuites((suites == null || suites.length == 0) ? SUITE_DEFAULT : suites);
+        } catch (ParseException e) {
+            LOGGER.error(e.getMessage());
         }
-
     }
-
 }
 
