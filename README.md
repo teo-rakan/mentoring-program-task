@@ -4,9 +4,9 @@ Command line options:
 Option | Definition | Default  
 -------|------------|--------  
 `-bu`, `--base_url` | base URL | http://www.sho.com  
-`-tp`, `--target_platform` | target platform | determined by System.getProperty("os.name")  
- `-b`, `--browser` | browser name | Chrome
- `-s`, `--suite` |- suite xml file path (full, relative or file name from **suite** directory) | `/suite/desktop-smoke.xml`
+`-tp`, `--target_platform` | target platform (Windows, Mac, Android, IOS) | system value (Windows or Mac) 
+ `-b`, `--browser` | browser name (only Chrome yet) | Chrome
+ `-s`, `--suite` | suite xml-file path (full, relative or file name from **suite** directory) | `/suite/desktop-smoke.xml`
 
 #### Maven build command:
 ```bash
