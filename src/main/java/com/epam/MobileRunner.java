@@ -2,13 +2,13 @@ package com.epam;
 
 import com.epam.core.Configuration;
 import com.epam.core.cli.CliOptions;
-import com.epam.tests.mobile.HomePageGlobalVerificationTest;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
+import java.util.Arrays;
 
 public class MobileRunner extends Runner {
 
@@ -30,16 +30,14 @@ public class MobileRunner extends Runner {
 
     void run() {
         AppiumDriverLocalService appiumService = buildAppiumService();
-        String appiumUrl;
 
         testNG.setListenerClasses(getListeners());
-        testNG.setTestClasses(new Class[]{HomePageGlobalVerificationTest.class});
+        testNG.setTestSuites(Arrays.asList(Configuration.getSuites()));
 
         appiumService.start();
 
-        appiumUrl = appiumService.getUrl().toString();
-        Configuration.setAppiumURL(appiumUrl);
-        LOGGER.info("Appium URL: " + appiumUrl);
+        Configuration.setAppiumURL(appiumService.getUrl().toString());
+        LOGGER.info("Appium URL: " + Configuration.getAppiumURL());
         try {
             testNG.run();
         } finally {
