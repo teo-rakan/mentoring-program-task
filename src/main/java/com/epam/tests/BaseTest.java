@@ -27,7 +27,6 @@ public class BaseTest {
 
     @BeforeSuite
     public void openBrowser() {
-        LOGGER.debug("Open home page");
         try {
             driverManager.open(Configuration.getBaseUrl());
         } catch (Exception ex) {
@@ -42,12 +41,12 @@ public class BaseTest {
 
     protected void verifyLink(String title, String link) {
         if (link != null) {
-            String linkMessage = "%s link is unavailable: %s";
-            int responseCode = HttpUtil.getResponseCode(link);
-
-            assertEquals(responseCode, 200, format(linkMessage, title, link));
+            String failMessage = "%s link is unavailable: %s";
+            int code = HttpUtil.getResponseCode(link);
+            assertEquals(code, 200, format(failMessage, title, link));
         } else {
-            LOGGER.warn("Null link for " + title + " was found.");
+            String nullMessage = "Null link for %s was found";
+            LOGGER.warn(format(nullMessage, title));
         }
     }
 }
