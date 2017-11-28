@@ -1,7 +1,7 @@
 package com.epam.pages.mobile;
 
 import com.epam.pages.HeaderLayout;
-import com.epam.pages.bean.MenuItem;
+import com.epam.pages.entity.MenuItem;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;

@@ -1,6 +1,6 @@
 package com.epam.tests;
 
-import com.epam.pages.bean.MenuItem;
+import com.epam.pages.entity.MenuItem;
 
 import java.util.List;
 

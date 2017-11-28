@@ -1,7 +1,7 @@
 package com.epam.tests.desktop;
 
 import com.epam.core.Configuration;
-import com.epam.pages.bean.MenuItem;
+import com.epam.pages.entity.MenuItem;
 import com.epam.pages.desktop.DesktopHeaderLayout;
 import com.epam.tests.HeaderVerificationBaseTest;
 import org.apache.logging.log4j.LogManager;
@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.epam.pages.bean.RGBAColor.*;
+import static com.epam.pages.entity.RGBAColor.*;
 
 public class HomePageHeaderVerificationTest extends HeaderVerificationBaseTest {
 

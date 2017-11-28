@@ -1,7 +1,7 @@
 package com.epam.pages.desktop;
 
 import com.epam.pages.HeaderLayout;
-import com.epam.pages.bean.MenuItem;
+import com.epam.pages.entity.MenuItem;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

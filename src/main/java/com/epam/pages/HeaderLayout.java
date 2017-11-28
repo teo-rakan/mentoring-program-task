@@ -1,6 +1,6 @@
 package com.epam.pages;
 
-import com.epam.pages.bean.MenuItem;
+import com.epam.pages.entity.MenuItem;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;

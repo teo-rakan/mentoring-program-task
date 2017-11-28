@@ -1,7 +1,7 @@
 package com.epam.tests.mobile;
 
 import com.epam.core.Configuration;
-import com.epam.pages.bean.MenuItem;
+import com.epam.pages.entity.MenuItem;
 import com.epam.pages.mobile.MobileHeaderLayout;
 import com.epam.tests.HeaderVerificationBaseTest;
 import org.testng.Assert;
@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.epam.pages.bean.RGBAColor.*;
+import static com.epam.pages.entity.RGBAColor.*;
 
 public class HomePageGlobalVerificationTest extends HeaderVerificationBaseTest {
 

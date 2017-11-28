@@ -1,7 +1,7 @@
 package com.epam.pages.mobile;
 
 import com.epam.pages.BasePage;
-import com.epam.pages.bean.Link;
+import com.epam.pages.entity.Link;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;

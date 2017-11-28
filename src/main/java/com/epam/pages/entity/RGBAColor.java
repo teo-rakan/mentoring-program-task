@@ -1,4 +1,4 @@
-package com.epam.pages.bean;
+package com.epam.pages.entity;
 
 public enum RGBAColor {
     BLACK("rgba(0, 0, 0, 0)"),

@@ -1,4 +1,4 @@
-package com.epam.pages.bean;
+package com.epam.pages.entity;
 
 public class MenuItem extends Link {
 

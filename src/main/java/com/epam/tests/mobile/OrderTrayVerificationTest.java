@@ -1,7 +1,7 @@
 package com.epam.tests.mobile;
 
 import com.epam.core.Configuration;
-import com.epam.pages.bean.Link;
+import com.epam.pages.entity.Link;
 import com.epam.pages.mobile.OrderPage;
 import com.epam.tests.BaseTest;
 import org.testng.annotations.DataProvider;
