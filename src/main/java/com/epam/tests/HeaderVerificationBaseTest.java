@@ -37,19 +37,4 @@ public class HeaderVerificationBaseTest extends BaseTest {
         assertTrue(actual.equals(expected), format(diffMessage, actual, expected));
         verifyLink(actual.getTitle(), actual.getLink());
     }
-
-    protected void verifyLink(String title, String link) {
-        if (link != null) {
-            String linkMessage = "%s link is unavailable: %s";
-            int responseCode = HttpUtil.getResponseCode(link);
-
-            assertEquals(responseCode, 200, format(linkMessage, title, link));
-        } else {
-            LOGGER.warn("Null link for " + title + " was found.");
-        }
-
-
-    }
-
-
 }
