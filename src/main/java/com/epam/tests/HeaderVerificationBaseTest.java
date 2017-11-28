@@ -2,17 +2,27 @@ package com.epam.tests;
 
 import com.epam.pages.bean.MenuItem;
 import com.epam.utils.HttpUtil;
-import org.testng.Assert;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
+import static java.lang.String.format;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
 public class HeaderVerificationBaseTest extends BaseTest {
+
+    private static final Logger LOGGER = LogManager.getLogger(HeaderVerificationBaseTest.class);
 
     protected void verifyMenuItems(List<MenuItem> actualHeaders,
                                    List<MenuItem> expectedHeaders) {
-        Assert.assertEquals(actualHeaders.size(), expectedHeaders.size(),
-                "Expected header count: " + expectedHeaders.size()
-                        + " Found: " + actualHeaders.size());
+        String diffMessage = "Actual header count: %d Expected: %d";
+        int actualHeaderCount = actualHeaders.size();
+        int expectedHeaderCount = expectedHeaders.size();
+
+        assertEquals(actualHeaderCount, expectedHeaderCount,
+                format(diffMessage, actualHeaderCount, expectedHeaderCount));
 
         for (int i = 0; i < actualHeaders.size(); i++) {
             MenuItem actualHeader = actualHeaders.get(i);
@@ -22,13 +32,24 @@ public class HeaderVerificationBaseTest extends BaseTest {
     }
 
     protected void verifyMenuItem(MenuItem actual, MenuItem expected) {
-        String link = actual.getLink();
-        int responseCode = HttpUtil.getStatusCode(link);
+        String diffMessage = "\nActual: %s\nExpected: %s";
 
-        Assert.assertTrue(actual.equals(expected),
-                "\nActual: " + actual + "\nExpected: " + expected);
-        Assert.assertEquals(responseCode, 200,
-                actual.getTitle() + " link is unavailable: " + link);
+        assertTrue(actual.equals(expected), format(diffMessage, actual, expected));
+        verifyLink(actual.getTitle(), actual.getLink());
     }
+
+    protected void verifyLink(String title, String link) {
+        if (link != null) {
+            String linkMessage = "%s link is unavailable: %s";
+            int responseCode = HttpUtil.getResponseCode(link);
+
+            assertEquals(responseCode, 200, format(linkMessage, title, link));
+        } else {
+            LOGGER.warn("Null link for " + title + " was found.");
+        }
+
+
+    }
+
 
 }
