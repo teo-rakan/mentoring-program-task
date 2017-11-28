@@ -42,7 +42,7 @@ public class MenuItem {
     }
 
     public String getLinkWithoutParameters() {
-        return link.contains("?")
+        return (link != null && link.contains("?"))
                 ? link.substring(0, link.indexOf("?"))
                 : link;
     }
@@ -78,7 +78,8 @@ public class MenuItem {
 
 
         return title.equalsIgnoreCase(otherItem.getTitle())
-                && firstLink.equalsIgnoreCase(secondLink)
+                && ((firstLink == null && secondLink == null)
+                || firstLink.equalsIgnoreCase(secondLink))
                 && ((backgroundColor == null && secondBackground == null)
                 || backgroundColor.equalsIgnoreCase(otherItem.getBackgroundColor()))
                 && ((fontColor == null && secondFontColor == null)
