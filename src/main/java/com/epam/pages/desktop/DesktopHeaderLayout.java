@@ -2,7 +2,6 @@ package com.epam.pages.desktop;
 
 import com.epam.pages.HeaderLayout;
 import com.epam.pages.entity.MenuItem;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -19,23 +18,19 @@ public class DesktopHeaderLayout extends HeaderLayout {
     @FindBy(xpath = "//*[@class='global-navigation__right-menu-item']//a")
     private List<WebElement> headerRightMenuItems;
 
+    private List<MenuItem> convertIfVisible(List<WebElement> menuItems) {
+        driverManager.waitUntilVisible(header);
+        return (menuItems.stream().allMatch(WebElement::isDisplayed))
+                ? convertToMenuItemList(menuItems)
+                : null;
+    }
+
     @Override
     public List<MenuItem> getPrimaryMenuItems() {
-        //todo check visibility
-        return convertToMenuItemList(headerPrimaryMenuItems);
+        return convertIfVisible(headerPrimaryMenuItems);
     }
 
     public List<MenuItem> getRightMenuItems() {
-        return convertToMenuItemList(headerRightMenuItems);
+        return convertIfVisible(headerRightMenuItems);
     }
-
-    public boolean isHeaderVisible() {
-        try {
-            driverManager.waitUntilVisible(header);
-        } catch (WebDriverException exception) {
-            return false;
-        }
-        return true;
-    }
-
 }
