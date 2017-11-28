@@ -5,6 +5,11 @@ import org.apache.commons.cli.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class CliOptions {
 
     private static final Logger LOGGER = LogManager.getLogger(CliOptions.class);
@@ -14,21 +19,24 @@ public class CliOptions {
     private static final String BROWSER_NAME_OPTION = "browser_name";
     private static final String BROWSER_NAME_DEFAULT = "Chrome";
     private static final String SUITE_OPTION = "suite";
-    private static final String[] SUITE_DEFAULT = {"testng.xml"};
+    private static final String SUITE_DIR_DEFAULT = "./suite/";
+    private static final String[] SUITE_DEFAULT = { SUITE_DIR_DEFAULT + "desktop-smoke.xml"};
 
     private static Option getBaseUrlOption() {
         return new Option("bu", BASE_URL_OPTION, true,
-                "Set base URL value. Default: " + BASE_URL_DEFAULT);
+                "Base URL value. Default: " + BASE_URL_DEFAULT);
     }
 
     private static Option getBrowserOption() {
         return new Option("bn", BROWSER_NAME_OPTION, true,
-                "Set browser name for Mobile: iOS, Android. For Web: Safari, IE, Chrome.");
+                "Browser name. For mobile: ios, android. For Web: "
+                + "safari, ie, chrome. Default: " + BROWSER_NAME_DEFAULT);
     }
 
     private static Option getSuiteOption() {
         return new Option("s", SUITE_OPTION, true,
-                "Set testNG suite file(-es) path");
+                "TestNG suite file(-es) path. Default: "
+                        + Arrays.toString(SUITE_DEFAULT));
     }
 
     private static Options getAllOptions() {
@@ -48,10 +56,39 @@ public class CliOptions {
 
             Configuration.setBaseUrl(baseUrl);
             Configuration.setBrowserName(browser);
-            Configuration.setSuites((suites == null || suites.length == 0) ? SUITE_DEFAULT : suites);
+            setSuites(suites);
         } catch (ParseException e) {
             LOGGER.error(e.getMessage());
         }
+    }
+
+    private static void setSuites(String[] xmlSuites) {
+        if (xmlSuites != null && xmlSuites.length > 0) {
+            List<String> validSuites = new ArrayList<>();
+            for (String xmlSuite : xmlSuites) {
+                if (isFileExists(xmlSuite))
+                    validSuites.add(xmlSuite);
+                else if (isFileExists("." + xmlSuite))
+                    validSuites.add("." + xmlSuite);
+                else if (isFileExists(SUITE_DIR_DEFAULT + xmlSuite))
+                    validSuites.add(SUITE_DIR_DEFAULT + xmlSuite);
+                else
+                    LOGGER.error("Cannot find suite file: " + xmlSuite);
+            }
+            if (validSuites.isEmpty()) {
+                LOGGER.warn("Default suite(-es) will be used: "
+                        + Arrays.toString(SUITE_DEFAULT));
+                Configuration.setSuites(SUITE_DEFAULT);
+            } else {
+                Configuration.setSuites(validSuites.toArray(new String[0]));
+            }
+        } else {
+            Configuration.setSuites(SUITE_DEFAULT);
+        }
+    }
+
+    private static boolean isFileExists(String relativeOrFullPath) {
+        return new File(relativeOrFullPath).exists();
     }
 }
 
