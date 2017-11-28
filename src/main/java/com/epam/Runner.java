@@ -1,16 +1,16 @@
 package com.epam;
 
+import com.epam.core.Configuration;
 import com.epam.core.cli.CliOptions;
 import com.epam.core.testng.AnnotationTransformer;
 import com.epam.core.testng.TestListener;
-import com.epam.tests.desktop.HomePageHeaderVerificationTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.testng.ITestNGListener;
 import org.testng.TestNG;
-import org.testng.xml.XmlSuite;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Runner {
@@ -37,10 +37,7 @@ public class Runner {
 
     void run() {
         testNG.setListenerClasses(getListeners());
-
-        //testNG.setXmlSuites();
-
-        testNG.setTestClasses(new Class[]{HomePageHeaderVerificationTest.class});
+        testNG.setTestSuites(Arrays.asList(Configuration.getSuites()));
         testNG.run();
     }
 }

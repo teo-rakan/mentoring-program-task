@@ -30,7 +30,7 @@ public class Configuration {
         Configuration.baseUrl = baseUrl;
     }
 
-    public String[] getSuites() {
+    public static String[] getSuites() {
         return suites;
     }
 
