@@ -1,8 +1,8 @@
 package com.epam.tests.desktop;
 
 import com.epam.core.Configuration;
-import com.epam.pages.entity.MenuItem;
 import com.epam.pages.desktop.DesktopHeaderLayout;
+import com.epam.pages.entity.MenuItem;
 import com.epam.tests.HeaderVerificationBaseTest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,8 +35,8 @@ public class HomePageHeaderVerificationTest extends HeaderVerificationBaseTest {
     }
 
     @Test(dataProvider = "desktop headers")
-    public void homePageHeaderVerificationTest(List<MenuItem> expectedPrimaryHeaders,
-                                               List<MenuItem> expectedRightHeaders) {
+    public void verifyHomePageHeader(List<MenuItem> expectedPrimaryHeaders,
+                                     List<MenuItem> expectedRightHeaders) {
         DesktopHeaderLayout headerLayout = new DesktopHeaderLayout();
         verifyMenu(headerLayout, expectedPrimaryHeaders, expectedRightHeaders);
 
