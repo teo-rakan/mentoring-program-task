@@ -48,6 +48,6 @@ public class Configuration {
     }
 
     public static boolean isMobile() {
-        return targetPlatform.matches("(ios|android)");
+        return targetPlatform.toLowerCase().matches("(ios|android)");
     }
 }

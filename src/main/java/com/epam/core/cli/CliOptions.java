@@ -10,19 +10,23 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.epam.utils.PropertyManager.get;
+
 public class CliOptions {
 
     private static final Logger LOGGER = LogManager.getLogger(CliOptions.class);
 
     private static final String BASE_URL_OPTION = "base_url";
-    private static final String BASE_URL_DEFAULT = "http://www.sho.com";
+    private static final String BASE_URL_DEFAULT = get("url.address");
     private static final String BROWSER_NAME_OPTION = "browser_name";
-    private static final String BROWSER_NAME_DEFAULT = "Chrome";
+    private static final String BROWSER_NAME_DEFAULT = get("browser.name");
     private static final String TARGET_PLATFORM_OPTION = "target_platform";
-    private static final String TARGET_PLATFORM_DEFAULT = "Windows";
+    private static final String TARGET_PLATFORM_DEFAULT = get("target.platform");
     private static final String SUITE_OPTION = "suite";
     private static final String SUITE_DIR_DEFAULT = "./suite/";
-    private static final String[] SUITE_DEFAULT = {SUITE_DIR_DEFAULT + "desktop-smoke.xml"};
+    private static final String[] SUITE_DEFAULT = {
+            SUITE_DIR_DEFAULT + get("suite.from.suite.dir")
+    };
 
     private static Option getBaseUrlOption() {
         return new Option("bu", BASE_URL_OPTION, true,
