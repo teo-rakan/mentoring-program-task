@@ -3,18 +3,17 @@ package com.epam.core.testng;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.testng.ITestContext;
-import org.testng.ITestListener;
-import org.testng.ITestResult;
+import org.testng.*;
 
 
-public class TestListener implements ITestListener {
+public class TestListener implements ITestListener, ISuiteListener {
 
     private static final Logger LOGGER = LogManager.getLogger(TestListener.class);
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-        LOGGER.debug(iTestResult.getName() + " started");
+        LOGGER.debug("=======================================");
+        LOGGER.debug(iTestResult.getName() + ": STARTED");
     }
 
     @Override
@@ -40,11 +39,24 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onStart(ITestContext iTestContext) {
-        LOGGER.debug("===== " + iTestContext.getName() + " =====");
     }
 
     @Override
     public void onFinish(ITestContext iTestContext) {
-        LOGGER.debug("======================================");
+    }
+
+    @Override
+    public void onStart(ISuite iSuite) {
+        LOGGER.debug("=======================================");
+        LOGGER.debug("SUITE: " + iSuite.getName());
+        LOGGER.debug("=======================================");
+    }
+
+    @Override
+    public void onFinish(ISuite iSuite) {
+        LOGGER.debug("=======================================");
+        LOGGER.debug("End of suite ==========================");
+        LOGGER.debug("=======================================");
+
     }
 }
