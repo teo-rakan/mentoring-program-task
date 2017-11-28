@@ -28,8 +28,8 @@ public class HomePageGlobalVerificationTest extends HeaderVerificationBaseTest {
                 new MenuItem("COMEDY", baseURL + "/comedy", BLACK, WHITE));
 
         List<MenuItem> red = Arrays.asList(
-                new MenuItem("TV SCHEDULE", baseURL + "/schedule", BLACK, RED),
-                new MenuItem("ON DEMAND AND STREAMING SCHEDULE", baseURL + "/on-demand/series", BLACK, RED));
+                new MenuItem("TV SCHEDULE", baseURL + "/schedule", BLACK, LIGHT_RED),
+                new MenuItem("ON DEMAND AND STREAMING SCHEDULE", baseURL + "/on-demand/series", BLACK, LIGHT_RED));
 
         MenuItem getShowtime = new MenuItem("GET SHOWTIME", baseURL + "/order", BLACK, WHITE);
 

@@ -43,7 +43,6 @@ public class HomePageHeaderVerificationTest extends HeaderVerificationBaseTest {
     }
 
 
-
     private void verifyMenu(DesktopHeaderLayout header,
                             List<MenuItem> expectedPrimaryHeaders,
                             List<MenuItem> expectedRightHeaders) {
