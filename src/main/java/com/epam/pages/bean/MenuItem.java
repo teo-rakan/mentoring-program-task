@@ -1,66 +1,26 @@
 package com.epam.pages.bean;
 
-public class MenuItem {
-    private String title;
-    private String link;
+public class MenuItem extends Link {
+
     private String backgroundColor;
     private String fontColor;
 
-    public MenuItem(String title, String link) {
-        this.title = title;
-        this.link = link;
-    }
-
     public MenuItem(String title, String link, String backgroundColor, String fontColor) {
-        this.title = title;
-        this.link = link;
+        super(title, link);
         this.backgroundColor = backgroundColor;
         this.fontColor = fontColor;
     }
 
     public MenuItem(String title, String link, RGBAColor backgroundColor, RGBAColor fontColor) {
-        this.title = title;
-        this.link = link;
-        this.backgroundColor = backgroundColor.toString();
-        this.fontColor = fontColor.toString();
+        this(title, link, backgroundColor.toString(), fontColor.toString());
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
-
-    public String getLinkWithoutParameters() {
-        return (link != null && link.contains("?"))
-                ? link.substring(0, link.indexOf("?"))
-                : link;
-    }
-
-    public String getBackgroundColor() {
+    private String getBackgroundColor() {
         return backgroundColor;
     }
 
-    public void setBackgroundColor(String backgroundColor) {
-        this.backgroundColor = backgroundColor;
-    }
-
-    public String getFontColor() {
+    private String getFontColor() {
         return fontColor;
-    }
-
-    public void setFontColor(String fontColor) {
-        this.fontColor = fontColor;
     }
 
     @Override
