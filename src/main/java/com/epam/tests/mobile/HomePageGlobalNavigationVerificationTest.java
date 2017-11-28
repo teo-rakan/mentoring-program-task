@@ -13,7 +13,7 @@ import java.util.List;
 
 import static com.epam.pages.entity.RGBAColor.*;
 
-public class HomePageGlobalVerificationTest extends HeaderVerificationBaseTest {
+public class HomePageGlobalNavigationVerificationTest extends HeaderVerificationBaseTest {
 
     @DataProvider(name = "mobile headers")
     public static Object[][] headers() {
@@ -38,7 +38,7 @@ public class HomePageGlobalVerificationTest extends HeaderVerificationBaseTest {
 
 
     @Test(dataProvider = "mobile headers")
-    public void homePageGlobalVerificationTest(List<MenuItem> primary,
+    public void verifyHomePageGlobalNavigation(List<MenuItem> primary,
                                                List<MenuItem> red,
                                                MenuItem getShowtime) {
         MobileHeaderLayout headerLayout = new MobileHeaderLayout();
