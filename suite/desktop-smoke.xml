@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite allow-return-values="false" configfailurepolicy="skip"
+       data-provider-thread-count="10" group-by-instances="false" junit="false"
+       name="Desktop_Smoke" parallel="false" preserve-order="true"
+       skipfailedinvocationcounts="false" verbose="2">
+
+    <test name="Desktop_1_Home_Page_Header_Verification">
+        <classes>
+            <class name="com.epam.tests.desktop.HomePageHeaderVerificationTest"/>
+        </classes>
+    </test>
+    <test name="Desktop_2_Footer_Verification">
+        <classes>
+            <class name="com.epam.tests.desktop.FooterVerificationTest"/>
+        </classes>
+    </test>
+
+</suite>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite allow-return-values="false" configfailurepolicy="skip"
+       data-provider-thread-count="10" group-by-instances="false" junit="false"
+       name="Mobile_Smoke" parallel="false" preserve-order="true"
+       skipfailedinvocationcounts="false" verbose="2">
+
+    <test name="Mobile_1_Home_Page_Global_Navigation_Verification">
+        <classes>
+            <class name="com.epam.tests.mobile.HomePageGlobalNavigationVerificationTest"/>
+        </classes>
+    </test>
+    <test name="Mobile_2_Order_Tray_Verification">
+        <classes>
+            <class name="com.epam.tests.mobile.OrderTrayVerificationTest"/>
+        </classes>
+    </test>
+
+</suite>
