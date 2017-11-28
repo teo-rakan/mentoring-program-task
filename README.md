@@ -10,7 +10,7 @@ Command line options:
 mvn clean package
 ```
 
-#### For testing with Chrome:
+#### For testing with Desktop/Chrome:
 ```bash
 java -jar target/test-project-1.0-v1/test-project.jar 
 ```
