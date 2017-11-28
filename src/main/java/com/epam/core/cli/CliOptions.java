@@ -25,7 +25,7 @@ public class CliOptions {
     private static final String SUITE_OPTION = "suite";
     private static final String SUITE_DIR_DEFAULT = "./suite/";
     private static final String[] SUITE_DEFAULT = {
-            SUITE_DIR_DEFAULT + get("suite.from.suite.dir")
+            "." + get("default.suite")
     };
 
     private static Option getBaseUrlOption() {
