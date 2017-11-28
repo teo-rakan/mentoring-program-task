@@ -42,7 +42,6 @@ public class Link {
         String secondLink = otherLink.getLinkWithoutParameters();
 
 
-
         return title.equalsIgnoreCase(otherLink.getTitle())
                 && ((firstLink == null && secondLink == null)
                 || firstLink.equalsIgnoreCase(secondLink));

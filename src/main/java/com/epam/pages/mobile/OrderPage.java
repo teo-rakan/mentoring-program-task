@@ -2,12 +2,10 @@ package com.epam.pages.mobile;
 
 import com.epam.pages.BasePage;
 import com.epam.pages.bean.Link;
-import com.epam.pages.bean.MenuItem;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
 
 import java.util.ArrayList;
 import java.util.List;

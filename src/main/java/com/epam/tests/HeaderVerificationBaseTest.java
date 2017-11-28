@@ -1,9 +1,6 @@
 package com.epam.tests;
 
 import com.epam.pages.bean.MenuItem;
-import com.epam.utils.HttpUtil;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
@@ -13,7 +10,6 @@ import static org.testng.Assert.assertTrue;
 
 public class HeaderVerificationBaseTest extends BaseTest {
 
-    private static final Logger LOGGER = LogManager.getLogger(HeaderVerificationBaseTest.class);
 
     protected void verifyMenuItems(List<MenuItem> actualHeaders,
                                    List<MenuItem> expectedHeaders) {

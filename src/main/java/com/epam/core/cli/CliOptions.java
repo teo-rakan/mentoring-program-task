@@ -20,7 +20,7 @@ public class CliOptions {
     private static final String BROWSER_NAME_DEFAULT = "Chrome";
     private static final String SUITE_OPTION = "suite";
     private static final String SUITE_DIR_DEFAULT = "./suite/";
-    private static final String[] SUITE_DEFAULT = { SUITE_DIR_DEFAULT + "desktop-smoke.xml"};
+    private static final String[] SUITE_DEFAULT = {SUITE_DIR_DEFAULT + "desktop-smoke.xml"};
 
     private static Option getBaseUrlOption() {
         return new Option("bu", BASE_URL_OPTION, true,
@@ -30,7 +30,7 @@ public class CliOptions {
     private static Option getBrowserOption() {
         return new Option("bn", BROWSER_NAME_OPTION, true,
                 "Browser name. For mobile: ios, android. For Web: "
-                + "safari, ie, chrome. Default: " + BROWSER_NAME_DEFAULT);
+                        + "safari, ie, chrome. Default: " + BROWSER_NAME_DEFAULT);
     }
 
     private static Option getSuiteOption() {

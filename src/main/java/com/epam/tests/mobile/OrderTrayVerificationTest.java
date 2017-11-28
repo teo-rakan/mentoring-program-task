@@ -22,7 +22,7 @@ public class OrderTrayVerificationTest extends BaseTest {
     public static Object[][] headers() {
         String title = "HOW DO YOU WANT TO GET SHOWTIME?";
 
-        String [] logos = { "From Showtime", "Amazon Prime",
+        String[] logos = {"From Showtime", "Amazon Prime",
                 "Amazon Devices", "Android", "Apple", "DIRECTV NOW",
                 "Hulu", "PlayStation Vue", "Roku", "Sling", "Smart TVs",
                 "Xbox One", "YouTube TV", "TV Provider"};
@@ -31,7 +31,7 @@ public class OrderTrayVerificationTest extends BaseTest {
     }
 
     @Test(dataProvider = "providers")
-    public void orderVerificationTest(String title, String [] expectedLogos) {
+    public void orderVerificationTest(String title, String[] expectedLogos) {
         String failMessage = "Actual title: %s Expected: %s";
         driverManager.open(Configuration.getBaseUrl() + "/order");
         OrderPage page = new OrderPage();
@@ -51,7 +51,7 @@ public class OrderTrayVerificationTest extends BaseTest {
 
             assertEquals(imageTitle, expectedTitle,
                     format(failMessage, imageTitle, expectedTitle));
-            if (i > 0 ) verifyLinkContainsProviderName(imageTitle, imageLink);
+            if (i > 0) verifyLinkContainsProviderName(imageTitle, imageLink);
             verifyLink(imageTitle, imageLink);
         }
     }
