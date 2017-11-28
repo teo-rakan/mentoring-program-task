@@ -13,17 +13,19 @@ public class HttpUtil {
 
     private static final Logger LOGGER = LogManager.getLogger(HttpUtil.class);
 
-    public static int getStatusCode(String link) {
+    public static int getResponseCode(String link) {
         CloseableHttpClient client = HttpClientBuilder.create().build();
         HttpGet get = new HttpGet(link);
         int responseCode = 0;
 
         try {
             HttpResponse response = client.execute(get);
-            get.releaseConnection();
             responseCode = response.getStatusLine().getStatusCode();
         } catch (IOException e) {
-            LOGGER.error("Cannot execute HTTP get request: " + e.getMessage());
+            LOGGER.error("Cannot execute HTTP get request: "
+                    + get.getRequestLine() + " Reason: " + e.getMessage());
+        } finally {
+            get.releaseConnection();
         }
         return responseCode;
     }
