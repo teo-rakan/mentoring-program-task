@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.epam.utils.PropertyManager.get;
+import static com.epam.utils.PropertyManager.getKeysWithPrefix;
 
 public class CliOptions {
 
@@ -41,8 +42,8 @@ public class CliOptions {
 
     private static Option getPlatformOption() {
         return new Option("tp", TARGET_PLATFORM_OPTION, true,
-                "Target platform. For mobile: ios, android. For desktop: "
-                        + "windows, macos. Default: " + TARGET_PLATFORM_DEFAULT);
+                "Target platform. For mobile: IOS, Android. For desktop: "
+                        + "Windows, Mac. Default: " + TARGET_PLATFORM_DEFAULT);
     }
 
     private static Option getSuiteOption() {
@@ -70,11 +71,24 @@ public class CliOptions {
 
             Configuration.setBaseUrl(baseUrl);
             Configuration.setBrowserName(browser);
-            Configuration.setTargetPlatform(target);
+            setTargetPlatform(target);
             setSuites(suites);
         } catch (ParseException e) {
             LOGGER.error(e.getMessage());
         }
+    }
+
+    private static void setTargetPlatform(String target) {
+        if (target == null || target.isEmpty()) {
+            String os = System.getProperty("os.name").toLowerCase();
+            if (os.startsWith("mac"))
+                target = "Mac";
+            else if (os.startsWith("windows"))
+                target = "Windows";
+            else
+                throw new IllegalArgumentException("Unsupported OS: " + os);
+        }
+        Configuration.setTargetPlatform(target);
     }
 
     private static void setSuites(String[] xmlSuites) {

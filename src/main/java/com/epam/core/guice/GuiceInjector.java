@@ -16,10 +16,12 @@ public class GuiceInjector {
     private static final String PACKAGE = "com.epam.core.guice.modules.";
     private static Injector injector;
 
+    private static String capitalize(String str) {
+        return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+    }
+
     private static Class<? extends Module> findModule(String modulePartName) {
-        String capitalizedModulePartName = modulePartName.substring(0, 1).toUpperCase()
-                + modulePartName.substring(1).toLowerCase();
-        String className = PACKAGE + capitalizedModulePartName + "Module";
+        String className = PACKAGE + modulePartName + "Module";
 
         Class<? extends Module> module = null;
         try {
@@ -48,9 +50,9 @@ public class GuiceInjector {
 
     public static Injector get() {
         if (injector == null) {
-            String targetTestEnvironment = Configuration.isMobile()
-                    ? Configuration.getTargetPlatform()
-                    : Configuration.getBrowserName();
+            String platform = Configuration.getTargetPlatform();
+            String browser = Configuration.getBrowserName();
+            String targetTestEnvironment = capitalize(platform) + capitalize(browser);
             Class<? extends Module> moduleClass = findModule(targetTestEnvironment);
             Module module = createInstance(moduleClass);
 

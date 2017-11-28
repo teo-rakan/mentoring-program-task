@@ -9,9 +9,13 @@ import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.DefaultFieldDecorator;
 import org.openqa.selenium.support.pagefactory.FieldDecorator;
 
-public class ChromeModule extends GuiceModule {
+public class WindowsChromeModule extends GuiceModule {
 
-    private static final Logger LOGGER = LogManager.getLogger(ChromeModule.class);
+    private static final Logger LOGGER = LogManager.getLogger(WindowsChromeModule.class);
+
+    public WindowsChromeModule() {
+        System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+    }
 
     @Override
     public DriverManager provideDriverManager() {
@@ -25,5 +29,4 @@ public class ChromeModule extends GuiceModule {
         WebDriver driver = driverManager.getDriver();
         return new DefaultFieldDecorator(new DefaultElementLocatorFactory(driver));
     }
-
 }
