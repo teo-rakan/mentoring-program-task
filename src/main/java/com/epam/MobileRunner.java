@@ -1,14 +1,19 @@
 package com.epam;
 
 import com.epam.core.Configuration;
-import com.epam.core.cli.CliOptions;
+import com.epam.core.testng.AnnotationTransformer;
+import com.epam.core.testng.MobileTestListener;
+import com.epam.core.testng.TestListener;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.testng.ITestNGListener;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class MobileRunner extends Runner {
 
@@ -19,6 +24,13 @@ public class MobileRunner extends Runner {
                 .withLogFile(new File("./logs/appium.log"))
                 .withIPAddress("127.0.0.1")
                 .build();
+    }
+
+    List<Class<? extends ITestNGListener>> getListeners() {
+        List<Class<? extends ITestNGListener>> listeners = new ArrayList<>();
+        listeners.add(MobileTestListener.class);
+        listeners.add(AnnotationTransformer.class);
+        return listeners;
     }
 
     @Override

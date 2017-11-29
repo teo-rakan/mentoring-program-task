@@ -1,5 +1,9 @@
 package com.epam.core.testng;
 
+import com.epam.core.Configuration;
+import com.epam.core.guice.GuiceInjector;
+import com.epam.core.webdriver.DriverManager;
+import com.google.inject.Inject;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,6 +13,9 @@ import org.testng.*;
 public class TestListener implements ITestListener, ISuiteListener {
 
     private static final Logger LOGGER = LogManager.getLogger(TestListener.class);
+
+    @Inject
+    protected DriverManager driverManager;
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
@@ -25,6 +32,8 @@ public class TestListener implements ITestListener, ISuiteListener {
     public void onTestFailure(ITestResult iTestResult) {
         LOGGER.info(iTestResult.getName() + ": FAILED");
         LOGGER.error(ExceptionUtils.getStackTrace(iTestResult.getThrowable()));
+
+        driverManager.takeScreenshot();
     }
 
     @Override
@@ -39,14 +48,21 @@ public class TestListener implements ITestListener, ISuiteListener {
 
     @Override
     public void onStart(ITestContext iTestContext) {
+        try {
+            driverManager.open(Configuration.getBaseUrl());
+        } catch (Exception ex) {
+            LOGGER.error(ex.getMessage());
+        }
     }
 
     @Override
     public void onFinish(ITestContext iTestContext) {
+        driverManager.quit();
     }
 
     @Override
     public void onStart(ISuite iSuite) {
+        GuiceInjector.get().injectMembers(this);
         LOGGER.debug("=======================================");
         LOGGER.debug("SUITE: " + iSuite.getName());
         LOGGER.debug("=======================================");
@@ -57,6 +73,5 @@ public class TestListener implements ITestListener, ISuiteListener {
         LOGGER.debug("=======================================");
         LOGGER.debug("End of suite ==========================");
         LOGGER.debug("=======================================");
-
     }
 }
