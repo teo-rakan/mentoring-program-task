@@ -11,10 +11,6 @@ public class MenuItem extends Link {
         this.fontColor = fontColor;
     }
 
-    public MenuItem(String title, String link, RGBAColor backgroundColor, RGBAColor fontColor) {
-        this(title, link, backgroundColor.toString(), fontColor.toString());
-    }
-
     private String getBackgroundColor() {
         return backgroundColor;
     }

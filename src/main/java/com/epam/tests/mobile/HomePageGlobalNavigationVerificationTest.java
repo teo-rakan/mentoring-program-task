@@ -11,9 +11,13 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.epam.pages.entity.RGBAColor.*;
+import static com.epam.utils.PropertyManager.get;
 
 public class HomePageGlobalNavigationVerificationTest extends HeaderVerificationBaseTest {
+
+    private final static String BLACK = get("color.black");
+    private final static String WHITE = get("color.white");
+    private final static String LIGHT_RED = get("color.red.light");
 
     @DataProvider(name = "mobile headers")
     public static Object[][] headers() {
