@@ -1,6 +1,7 @@
 package com.epam.core.guice.modules;
 
-import com.epam.core.webdriver.AndroidDriverManager;
+import com.epam.core.webdriver.AndroidDriverFactory;
+import com.epam.core.webdriver.DriverFactory;
 import com.epam.core.webdriver.DriverManager;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.apache.logging.log4j.LogManager;
@@ -12,9 +13,9 @@ public class AndroidChromeModule extends GuiceModule {
     private static final Logger LOGGER = LogManager.getLogger(AndroidChromeModule.class);
 
     @Override
-    public DriverManager provideDriverManager() {
-        LOGGER.debug("AndroidDriverManager was provided");
-        return new AndroidDriverManager();
+    public DriverFactory provideDriverFactory() {
+        LOGGER.debug("AndroidDriverFactory was provided");
+        return new AndroidDriverFactory();
     }
 
     @Override
