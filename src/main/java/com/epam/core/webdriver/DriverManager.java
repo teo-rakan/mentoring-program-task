@@ -1,6 +1,8 @@
 package com.epam.core.webdriver;
 
+import com.epam.core.guice.GuiceInjector;
 import com.epam.utils.WaitUtil;
+import com.google.inject.Inject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
@@ -8,20 +10,20 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 
-public abstract class DriverManager {
+public class DriverManager {
 
     private static final Logger LOGGER = LogManager.getLogger(DriverManager.class);
 
-    WebDriver driver;
+    private WebDriver driver;
 
-    public WebDriver getDriver() {
-        if (null == driver) {
-            createDriver();
-        }
-        return driver;
+    public DriverManager(DriverFactory driverFactory) {
+        LOGGER.debug("New DriverManager creating...");
+        driver = driverFactory.createDriver();
     }
 
-    abstract void createDriver();
+    public WebDriver getDriver() {
+        return driver;
+    }
 
     public void open(String url) {
         getDriver().get(url);
@@ -48,5 +50,6 @@ public abstract class DriverManager {
         JavascriptExecutor js = ((JavascriptExecutor) driver);
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
     }
+
 }
 

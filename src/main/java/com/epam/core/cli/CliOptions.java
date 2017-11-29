@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.epam.utils.PropertyManager.get;
-import static com.epam.utils.PropertyManager.getKeysWithPrefix;
 
 public class CliOptions {
 

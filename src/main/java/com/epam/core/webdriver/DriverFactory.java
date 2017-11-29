@@ -2,6 +2,7 @@ package com.epam.core.webdriver;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.List;
@@ -9,9 +10,11 @@ import java.util.List;
 import static com.epam.utils.PropertyManager.get;
 import static com.epam.utils.PropertyManager.getKeysWithPrefix;
 
-abstract class MobileDriverManager extends DriverManager {
+public abstract class DriverFactory {
 
-    private static final Logger LOGGER = LogManager.getLogger(MobileDriverManager.class);
+    private static final Logger LOGGER = LogManager.getLogger(DriverFactory.class);
+
+    abstract WebDriver createDriver();
 
     DesiredCapabilities loadCapabilitiesFromProperties(String platform) {
         String prefix = platform + ".";
