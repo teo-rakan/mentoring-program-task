@@ -14,12 +14,6 @@ public class MobileRunner extends Runner {
 
     private static final Logger LOGGER = LogManager.getLogger(MobileRunner.class);
 
-    public static void main(String[] args) {
-        CliOptions.parseCmdLineArgs(args);
-        Runner runner = new MobileRunner();
-        runner.run();
-    }
-
     AppiumDriverLocalService buildAppiumService() {
         return new AppiumServiceBuilder()
                 .withLogFile(new File("./logs/appium.log"))
