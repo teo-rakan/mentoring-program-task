@@ -17,7 +17,7 @@ public abstract class GuiceModule extends AbstractModule {
     public abstract DriverFactory provideDriverFactory();
 
     @Provides
-    public DriverManager provideDriverManager(ThreadLocal<DriverManager> threadDriverManager) {
+    public DriverManager provideDriverManager() {
         LOGGER.debug("DriverManager was provided");
         return DriverManager.getInstance();
     }
