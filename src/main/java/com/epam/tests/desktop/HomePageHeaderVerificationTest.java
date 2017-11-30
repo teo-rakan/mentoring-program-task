@@ -4,20 +4,17 @@ import com.epam.core.Configuration;
 import com.epam.pages.desktop.DesktopHeaderLayout;
 import com.epam.pages.entity.MenuItem;
 import com.epam.tests.HeaderVerificationBaseTest;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static com.epam.utils.PropertyManager.get;
+import static java.lang.String.format;
 
 public class HomePageHeaderVerificationTest extends HeaderVerificationBaseTest {
-
-    private static final Logger LOGGER = LogManager.getLogger(HomePageHeaderVerificationTest.class);
 
     private final static String BLACK = get("color.black");
     private final static String WHITE = get("color.white");
@@ -41,17 +38,20 @@ public class HomePageHeaderVerificationTest extends HeaderVerificationBaseTest {
     @Test(dataProvider = "desktop headers")
     public void verifyHomePageHeader(List<MenuItem> expectedPrimaryHeaders,
                                      List<MenuItem> expectedRightHeaders) {
-        DesktopHeaderLayout headerLayout = new DesktopHeaderLayout();
-        verifyMenu(headerLayout, expectedPrimaryHeaders, expectedRightHeaders);
+        SoftAssert softAssert = new SoftAssert();
+        DesktopHeaderLayout header = new DesktopHeaderLayout();
+        List<MenuItem> primaryMenuItems = header.getPrimaryMenuItems();
+        List<MenuItem> rightMenuItems = header.getRightMenuItems();
+        String menuFailMessage = "%s menu items have problems. See log for details";
+        String searchIconFailMessage = "Search icon isn't displayed";
 
-    }
-
-
-    private void verifyMenu(DesktopHeaderLayout header,
-                            List<MenuItem> expectedPrimaryHeaders,
-                            List<MenuItem> expectedRightHeaders) {
-        verifyMenuItems(header.getPrimaryMenuItems(), expectedPrimaryHeaders);
-        verifyMenuItems(header.getRightMenuItems(), expectedRightHeaders);
-        Assert.assertTrue(header.isSearchIconDisplayed());
+        softAssert.assertTrue(
+                verifyMenuItems(primaryMenuItems, expectedPrimaryHeaders),
+                format(menuFailMessage, "Primary"));
+        softAssert.assertTrue(
+                verifyMenuItems(rightMenuItems, expectedRightHeaders),
+                format(menuFailMessage, "Right"));
+        softAssert.assertTrue(header.isSearchIconDisplayed(), searchIconFailMessage);
+        softAssert.assertAll();
     }
 }

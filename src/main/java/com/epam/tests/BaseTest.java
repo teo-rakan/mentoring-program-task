@@ -9,7 +9,6 @@ import org.apache.logging.log4j.Logger;
 import javax.inject.Inject;
 
 import static java.lang.String.format;
-import static org.testng.Assert.assertEquals;
 
 public class BaseTest {
 
@@ -22,14 +21,16 @@ public class BaseTest {
         GuiceInjector.get().injectMembers(this);
     }
 
-    protected void verifyLink(String title, String link) {
-        if (link != null) {
-            String failMessage = "%s link is unavailable: %s";
-            int code = HttpUtil.getResponseCode(link);
-            assertEquals(code, 200, format(failMessage, title, link));
-        } else {
+    protected boolean verifyLink(String title, String link) {
+        if (link == null) {
             String nullMessage = "Null link for %s was found";
             LOGGER.warn(format(nullMessage, title));
+            return true; //todo CanBeNull flag
         }
+        boolean isLinkAvailable = 200 == HttpUtil.getResponseCode(link);
+
+        if (!isLinkAvailable)
+            LOGGER.error("%s link is unavailable: %s", title, link);
+        return isLinkAvailable;
     }
 }

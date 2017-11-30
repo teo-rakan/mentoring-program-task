@@ -3,7 +3,6 @@ package com.epam;
 import com.epam.core.Configuration;
 import com.epam.core.testng.AnnotationTransformer;
 import com.epam.core.testng.MobileTestListener;
-import com.epam.core.testng.TestListener;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.apache.logging.log4j.LogManager;

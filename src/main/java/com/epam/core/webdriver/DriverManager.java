@@ -2,12 +2,13 @@ package com.epam.core.webdriver;
 
 import com.epam.utils.ScreenshotUtil;
 import com.epam.utils.WaitUtil;
-import com.google.inject.Inject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
+import static java.lang.String.format;
 
 
 public class DriverManager {
@@ -16,6 +17,7 @@ public class DriverManager {
 
     private DriverFactory driverFactory;
     private WebDriver driver;
+    private final String SCROLL_FAILED = "Cannot scroll to %s: %s";
 
     public DriverManager(DriverFactory driverFactory) {
         this.driverFactory = driverFactory;
@@ -59,8 +61,21 @@ public class DriverManager {
     }
 
     public void scrollToThePageBottom() {
-        JavascriptExecutor js = ((JavascriptExecutor) getDriver());
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        try {
+            JavascriptExecutor js = ((JavascriptExecutor) getDriver());
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        } catch (Exception e) {
+            LOGGER.error(format(SCROLL_FAILED, " the page bottom", e.getMessage()));
+        }
+    }
+
+    public void scrollTo(WebElement element) {
+        try {
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].scrollIntoView(true);", element);
+        } catch (Exception e) {
+            LOGGER.error(format(SCROLL_FAILED, element, e.getMessage()));
+        }
     }
 
     public void takeScreenshot() {
